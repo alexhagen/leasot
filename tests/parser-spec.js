@@ -285,6 +285,18 @@ describe('parsing', function() {
         });
     });
 
+    describe('python2', function() {
+        it('parse # and """ #, #2 comments', function() {
+            const file = getFixturePath('python2.py');
+            const comments = getComments(file);
+            should.exist(comments);
+            comments.should.have.length(2);
+            verifyComment(comments[0], 'TODO', 6, 'refactor this');
+            verifyComment(comments[1], 'FIXME', 12, 'Move this out');
+        });
+    });
+
+
     describe('latex', function() {
         it('parse % and \\begin{comment} comments', function() {
             const file = getFixturePath('tex.tex');
